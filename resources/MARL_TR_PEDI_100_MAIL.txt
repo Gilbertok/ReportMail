@@ -1,0 +1,14 @@
+create or replace TRIGGER "MARL_TR_PEDI_100_MAIL" 
+AFTER INSERT on pedi_100
+for each row
+
+begin
+
+   if inserting and :new.origem_pedido = 33
+   then
+      insert INTO marl_mail_pedido (cod_empresa, pedido_venda) values (:new.codigo_empresa, :new.pedido_venda);
+   end if;
+
+end marl_tr_pedi_100_mail;
+
+-- ALTER TRIGGER "MARL_TR_PEDI_100_MAIL" ENABLE
